@@ -3,19 +3,36 @@ services:
     build: ..\booking_service
     ports:
       - "8080:8080"
+    depends_on:
+      - eureka-server
+    restart: on-failure
+
   room_service:
     build: ..\room_service
     ports:
       - "8081:8081"
+    depends_on:
+      - eureka-server
+    restart: on-failure
+
   user_service:
     build: ..\user_service
     ports:
       - "8082:8082"
+    depends_on:
+      - eureka-server
+    restart: on-failure
+
   booking_gateway:
     build: ..\booking-gateway
     ports:
       - "9090:9090"
+    depends_on:
+      - eureka-server
+    restart: on-failure
+
   eureka-server:
     build: ..\eureka_server
     ports:
       - "8761:8761"
+    restart: on-failure
